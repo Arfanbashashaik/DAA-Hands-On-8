@@ -1,0 +1,45 @@
+class my_fixed_stack:
+    def __init__(self,limit):
+        self.limit=limit
+        self.stack =[0] *limit 
+        self.present_size= 0
+    def is_empty(self):
+        return self.present_size== 0
+    def is_full(self):
+        return self.present_size==self.limit
+    def push(self,value):
+        if self.is_full():
+            print("Stack Overflow: Cannot add",value)
+            return
+        self.stack[self.present_size]=value
+        self.present_size+=1
+    def pop(self):
+        if self.is_empty():
+            print("Stack Underflow: No elements to remove")
+            return None
+        self.present_size-=1
+        return self.stack[self.present_size]
+    def peek(self):
+        if self.is_empty():
+            print("Stack is empty: No elements to peek")
+            return None
+        return self.stack[self.present_size - 1]
+    def display(self):
+        if self.is_empty():
+            print("Stack is empty")
+            return
+        for i in range(self.present_size):
+            print(self.stack[i], end=" ")
+        print()
+        
+if __name__== "__main__":
+    my_fixed_stack = my_fixed_stack(5)
+    my_fixed_stack.push(1)
+    my_fixed_stack.push(2)
+    my_fixed_stack.push(3)
+    my_fixed_stack.push(4)
+    my_fixed_stack.push(5)
+    my_fixed_stack.display()  
+    print("Removed element:",my_fixed_stack.pop())
+    print("Top element:",my_fixed_stack.peek())
+    my_fixed_stack.display()
