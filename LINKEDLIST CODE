@@ -1,0 +1,39 @@
+class Node:
+    def __init__(self, data):
+        self.data= data
+        self.next =None
+class MyLinkedList:
+    def __init__(self):
+        self.head=None
+    def is_empty(self):
+        return self.head is None
+    def insert_front(self,value):
+        new_node=Node(value)
+        new_node.next=self.head
+        self.head =new_node
+    def delete_front(self):
+        if self.is_empty():
+            print("Cannot delete: The list is currently empty.")
+            return None
+        data=self.head.data
+        self.head= self.head.next
+        return data
+    def display(self):
+        if self.is_empty():
+            print("List is empty")
+            return
+        present =self.head
+        while present:
+            print(present.data, end=" ")
+            present= present.next
+        print()
+if __name__ == "__main__":
+    my_linked_list = MyLinkedList()
+    my_linked_list.insert_front(1)
+    my_linked_list.insert_front(2)
+    my_linked_list.insert_front(3)
+    my_linked_list.insert_front(4)
+    my_linked_list.insert_front(5)
+    my_linked_list.display()  
+    print("Deleted element:", my_linked_list.delete_front())
+    my_linked_list.display()
