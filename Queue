@@ -1,0 +1,46 @@
+class MyFixedQueue:
+    def __init__(self,limit):
+        self.limit= limit
+        self.queue = [0] *limit 
+        self.head=0
+        self.tail=-1
+        self.present_size =0 
+    def is_empty(self):
+        return self.present_size==0
+    def is_full(self):
+        return self.present_size==self.limit
+    def enqueue(self,value):
+        if self.is_full():
+            print("Queue Overflow: Cannot add",value)
+            return
+        self.tail=(self.tail+ 1)%self.limit
+        self.queue[self.tail] =value
+        self.present_size +=1
+    def dequeue(self):
+        if self.is_empty():
+            print("Queue Underflow:No elements to remove")
+            return None
+        data=self.queue[self.head]
+        self.head=(self.head+1)%self.limit
+        self.present_size-=1
+        return data
+    def display(self):
+        if self.is_empty():
+            print("Queue is empty")
+            return
+        i=self.head
+        while i != self.tail:
+            print(self.queue[i],end=" ")
+            i=(i + 1)%self.limit
+        print(self.queue[self.tail])
+
+if __name__ == "__main__":
+    my_fixed_queue = MyFixedQueue(5)
+    my_fixed_queue.enqueue(1)
+    my_fixed_queue.enqueue(2)
+    my_fixed_queue.enqueue(3)
+    my_fixed_queue.enqueue(4)
+    my_fixed_queue.enqueue(5)
+    my_fixed_queue.display()  
+    print("Dequeued element:", my_fixed_queue.dequeue())
+    my_fixed_queue.display()
